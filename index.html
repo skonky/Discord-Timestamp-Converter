@@ -42,7 +42,7 @@
             </span>
             <span class="discord-message-timestamp">Today at 10:30PM</span>
           </div>
-          <div class="discord-message-body">How about <span class="discord-timestamp">September 18, 2021 10:35PM</span>?</div>
+          <div class="discord-message-body">How about <span class="discord-timestamp" id="formatted">September 18, 2021 10:35PM</span>?</div>
         </div>
       </div>
 
@@ -74,9 +74,11 @@
       var Control = document.querySelector('input[type="datetime-local"]');
       var str1 = "";
       var date = Date.parse(Control.value);
+
       var nextDate = str1.concat("&lt;t:", Math.round(date / 1000), ":", style, "&gt;");
       if (document.getElementById("timestamp").innerHTML !== nextDate) {
-        document.getElementById("timestamp").innerHTML = nextDate
+        document.getElementById("timestamp").innerHTML = nextDate;
+        document.getElementById("formatted").innerHTML = moment(Date(date)).format('MMMM D YYYY, h:mm A');
       }
     }
 
