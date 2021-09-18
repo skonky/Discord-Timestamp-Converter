@@ -20,7 +20,7 @@
   <div class="main">
 
     <h1>Discord universal timestamp converter</h1>
-    <p>There is a hidden but useful <a href="https://discord.com/developers/docs/reference#message-formatting-timestamp-styles" class="button">timestamp formatting</a> feature on Discord which converts a UTC time to the client's local time.</p>
+    <p>There is a hidden but useful <a href="https://discord.com/developers/docs/reference#message-formatting-timestamp-styles" class="button">timestamp formatting</a> feature on Discord which converts a UTC timestamp to the client's local time.</p>
     <p>This is useful for coördinating gaming sessions or movie nights with your friends who live in different timezones.</p>
     <p>This quick tool will allow you to easily copy a time and date of your choosing to the new format and paste it on Discord.</p>
 
@@ -57,6 +57,10 @@
     var date = new Date();
     var style = "f"
 
+    var formatDict = {
+      f: 'MMMM D YYYY, h:mm A',
+    };
+
     function changeDate(newDate) {
       var dateControl = document.querySelector('input[type="datetime-local"]');
       dateControl.value = newDate;
@@ -78,7 +82,7 @@
       var nextDate = str1.concat("&lt;t:", Math.round(date / 1000), ":", style, "&gt;");
       if (document.getElementById("timestamp").innerHTML !== nextDate) {
         document.getElementById("timestamp").innerHTML = nextDate;
-        document.getElementById("formatted").innerHTML = moment(Date(date)).format('MMMM D YYYY, h:mm A');
+        document.getElementById("formatted").innerHTML = moment(Date(date)).format(formatDict[style]);
       }
     }
 
