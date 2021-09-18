@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="discord.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+</head>
+<body>
+  <div class="main">
+
+    <h1>Discord universal timestamp converter</h1>
+    <p>There is a hidden but useful <a href="https://discord.com/developers/docs/reference#message-formatting-timestamp-styles" class="button">timestamp formatting</a> feature on Discord which converts a UTC time to the client's local time.</p>
+    <p>This is useful for coördinating gaming sessions or movie nights with your friends who live in different timezones.</p>
+    <p>This quick tool will allow you to easily copy a time and date of your choosing to the new format and paste it on Discord.</p>
+
+    <div style="text-align: center;" class="timestamp-stuff">
+      <br>
+      <input type="datetime-local" id="meeting-time" name="time" value="" min="" max="">
+      <span class="timestamp-box" style="user-select: all;" id="timestamp"></span>  <button onclick="copyTimestamp(document.getElementById('timestamp').innerHTML)" class="timestamp-box copy-button">Copy</button>
+    </div>
+    <br>
+    <br>
+    <div class="discord-preview">
+
+      <div class="discord-message">
+        <div class="discord-author-avatar"><img src="https://cdn.discordapp.com/attachments/654503812593090602/665721745466195978/blue.png"></div>
+        <div class="discord-message-content">
+          <div>
+            <span class="discord-author-info">
+              <span class="discord-author-username">skonky</span>
+            </span>
+            <span class="discord-message-timestamp">Today at 10:30PM</span>
+          </div>
+          <div class="discord-message-body">How about <span class="discord-timestamp">September 18, 2021 10:35PM</span>?</div>
+        </div>
+      </div>
+
+    </div>
+
+    <br>
+    <p class="footer">Made by <a href="https://github.com/skonky">skonky</a> • <a href="https://github.com/skonky/Discord-Timestamp-Converter">Source code</a> • <a href="https://www.ndx.xyz">NDX Community</a></p>
+
+  </div>
+
+  <script type="text/javascript">
+    var date = new Date();
+    var style = "f"
+
+    function changeDate(newDate) {
+      var dateControl = document.querySelector('input[type="datetime-local"]');
+      dateControl.value = newDate;
+    }
+
+    changeDate(date.toLocaleString("sv-SE", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+    }).replace(" ", "T"))
+
+    function updateDatetime() {
+      var Control = document.querySelector('input[type="datetime-local"]');
+      var str1 = "";
+      var date = Date.parse(Control.value);
+      var nextDate = str1.concat("&lt;t:", Math.round(date / 1000), ":", style, "&gt;");
+      if (document.getElementById("timestamp").innerHTML !== nextDate) {
+        document.getElementById("timestamp").innerHTML = nextDate
+      }
+    }
+
+    function copyTimestamp(text) {
+      //window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
+      const el = document.createElement('textarea');
+      el.value = text.replace('&lt;', '<').replace('&gt;', '>');
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+    }
+
+    updateDatetime()
+    setInterval(updateDatetime, 100);
+  </script>
+
+</body>
+</html>
