@@ -6,8 +6,6 @@ body {
   --text-muted: #72767d;
 }
 
-
-
 h1 {
   font-family: 'Inter', sans-serif;
   font-weight: 900;
@@ -35,7 +33,7 @@ a:hover {
   left: 50%;
   /*top: 0%;*/
   transform: translate(-50%, 0%);
-  width: 30em;
+  width: 35em;
 }
 
 .timestamp-box {
@@ -45,6 +43,18 @@ a:hover {
   /*margin-top: 40px !important;*/
   display: inline-block;
   border-radius: 3px;
+}
+
+.form-box {
+  display: inline;
+}
+.form-box select {
+  color: #ccc;
+  font-size: 1em;
+}
+
+.timestamp-box select {
+  font-family: 'Inter', sans-serif;
 }
 
 .timestamp-stuff {
