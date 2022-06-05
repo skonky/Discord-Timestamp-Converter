@@ -32,6 +32,8 @@
           <option value="f">Short Date</option>
           <option value="F">Long Date</option>
           <option value="R">Relative</option>
+          <option value="t">Time Only</option>
+          <!--<option value="T">Time & Seconds</option> -->
         </select>
       </form> <span class="timestamp-box" style="user-select: all;" id="timestamp"></span>  <button onclick="copyTimestamp(document.getElementById('timestamp').innerHTML)" class="timestamp-box copy-button">Copy</button>
     </div>
@@ -296,6 +298,8 @@
         f: generalFormat('MMMM D YYYY, h:mm A'),
         F: generalFormat('dddd MMMM D YYYY, h:mm A'),
         R: relativeTime(),
+        t: generalFormat('h:mm A'),
+        T: generalFormat('h:mm:ss A'),
       };
       return formatDict[style]
     }
