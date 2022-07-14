@@ -32,12 +32,14 @@
         <select name="timestamp-format" id="timestamp-format" class="timestamp-box">
           <option value="f">Short Time & Date</option>
           <option value="F">Long Time & Date</option>
-          <option value="R">Relative</option>
+
           <option value="t">Time Only</option>
           <option value="T">Time Only (Seconds)</option>
-          <option value="d">Short Date</option>
-          <option value="D">Long Date</option>
-          <!--<option value="T">Time & Seconds</option> -->
+
+          <option value="d">Date (Short)</option>
+          <option value="D">Date (Long)</option>
+
+          <option value="R">Relative</option>
         </select>
       </form> <span class="timestamp-box" style="user-select: all;" id="timestamp"></span>  <button onclick="copyTimestamp(document.getElementById('timestamp').innerHTML)" class="timestamp-box copy-button">Copy</button>
     </div>
