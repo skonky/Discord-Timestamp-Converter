@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-
   <title>Discord Timestamp Converter</title>
 	<meta name="theme-color" content="#5865f2" />
 	<!-- <meta property="og:image" content="https://i.imgur.com/R7fdrCM.png" /> -->
+
 	<meta property="og:description" content="Get Discord's timestamp markdown from the time and date of your choosing." />
 	<meta property="og:site_name" content="Discord Timestamp Converter" />
 	<meta property="og:title" content="Convert a date to Discord's timestamp formatting" />
@@ -13,13 +13,14 @@
   <link rel="stylesheet" href="discord.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap" rel="stylesheet">
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
   <script src="https://unpkg.com/javascript-time-ago/bundle/javascript-time-ago.js"></script>
 </head>
 <body>
   <div class="main">
-
     <h1>Discord universal timestamp converter</h1>
     <p>There is a hidden but useful <a href="https://discord.com/developers/docs/reference#message-formatting-timestamp-styles" class="button">timestamp formatting</a> feature on Discord which converts a UTC timestamp to the client's local time.</p>
     <p>This is useful for coördinating gaming sessions or movie nights with your friends who live in different timezones.</p>
@@ -29,10 +30,13 @@
       <br>
       <input type="datetime-local" id="meeting-time" name="time" value="" min="" max=""> <form class="form-box">
         <select name="timestamp-format" id="timestamp-format" class="timestamp-box">
-          <option value="f">Short Date</option>
-          <option value="F">Long Date</option>
+          <option value="f">Short Time & Date</option>
+          <option value="F">Long Time & Date</option>
           <option value="R">Relative</option>
           <option value="t">Time Only</option>
+          <option value="T">Time Only (Seconds)</option>
+          <option value="d">Short Date</option>
+          <option value="D">Long Date</option>
           <!--<option value="T">Time & Seconds</option> -->
         </select>
       </form> <span class="timestamp-box" style="user-select: all;" id="timestamp"></span>  <button onclick="copyTimestamp(document.getElementById('timestamp').innerHTML)" class="timestamp-box copy-button">Copy</button>
@@ -40,7 +44,6 @@
     <br>
     <br>
     <div class="discord-preview">
-
       <div class="discord-message">
         <div class="discord-author-avatar"><img src="https://cdn.discordapp.com/attachments/366000357471420417/967477849672003604/unknown.png"></div>
         <div class="discord-message-content">
@@ -53,298 +56,10 @@
           <div class="discord-message-body">How about <span class="discord-timestamp" id="formatted">September 18, 2021 10:35PM</span>?</div>
         </div>
       </div>
-
     </div>
-
     <br>
-    <p class="footer">Made by <a href="https://github.com/skonky">Sukanku</a> • <a href="https://github.com/skonky/Discord-Timestamp-Converter">Source code</a><!-- • <a href="https://www.ndx.xyz">NDX.GG Community</a>--></p>
-
+    <p class="footer">Made by <a href="https://github.com/notaskunk">Sukanku</a> • <a href="https://github.com/notaskunk/Discord-Timestamp-Converter">Source code</a></p>
   </div>
-
-  <script type="text/javascript">
-    var date = new Date();
-    var style = "f"
-    TimeAgo.addDefaultLocale({
-    	"locale": "en",
-    	"long": {
-    		"year": {
-    			"previous": "last year",
-    			"current": "this year",
-    			"next": "next year",
-    			"past": {
-    				"one": "{0} year ago",
-    				"other": "{0} years ago"
-    			},
-    			"future": {
-    				"one": "in {0} year",
-    				"other": "in {0} years"
-    			}
-    		},
-    		"quarter": {
-    			"previous": "last quarter",
-    			"current": "this quarter",
-    			"next": "next quarter",
-    			"past": {
-    				"one": "{0} quarter ago",
-    				"other": "{0} quarters ago"
-    			},
-    			"future": {
-    				"one": "in {0} quarter",
-    				"other": "in {0} quarters"
-    			}
-    		},
-    		"month": {
-    			"previous": "last month",
-    			"current": "this month",
-    			"next": "next month",
-    			"past": {
-    				"one": "{0} month ago",
-    				"other": "{0} months ago"
-    			},
-    			"future": {
-    				"one": "in {0} month",
-    				"other": "in {0} months"
-    			}
-    		},
-    		"week": {
-    			"previous": "last week",
-    			"current": "this week",
-    			"next": "next week",
-    			"past": {
-    				"one": "{0} week ago",
-    				"other": "{0} weeks ago"
-    			},
-    			"future": {
-    				"one": "in {0} week",
-    				"other": "in {0} weeks"
-    			}
-    		},
-    		"day": {
-    			"previous": "yesterday",
-    			"current": "today",
-    			"next": "tomorrow",
-    			"past": {
-    				"one": "{0} day ago",
-    				"other": "{0} days ago"
-    			},
-    			"future": {
-    				"one": "in {0} day",
-    				"other": "in {0} days"
-    			}
-    		},
-    		"hour": {
-    			"current": "this hour",
-    			"past": {
-    				"one": "{0} hour ago",
-    				"other": "{0} hours ago"
-    			},
-    			"future": {
-    				"one": "in {0} hour",
-    				"other": "in {0} hours"
-    			}
-    		},
-    		"minute": {
-    			"current": "this minute",
-    			"past": {
-    				"one": "{0} minute ago",
-    				"other": "{0} minutes ago"
-    			},
-    			"future": {
-    				"one": "in {0} minute",
-    				"other": "in {0} minutes"
-    			}
-    		},
-    		"second": {
-    			"current": "now",
-    			"past": {
-    				"one": "{0} second ago",
-    				"other": "{0} seconds ago"
-    			},
-    			"future": {
-    				"one": "in {0} second",
-    				"other": "in {0} seconds"
-    			}
-    		}
-    	},
-    	"short": {
-    		"year": {
-    			"previous": "last yr",
-    			"current": "this yr",
-    			"next": "next yr",
-    			"past": "{0} yr ago",
-    			"future": "in {0} yr"
-    		},
-    		"quarter": {
-    			"previous": "last qtr.",
-    			"current": "this qtr.",
-    			"next": "next qtr.",
-    			"past": "{0} qtr ago",
-    			"future": "in {0} qtr"
-    		},
-    		"month": {
-    			"previous": "last mo",
-    			"current": "this mo",
-    			"next": "next mo",
-    			"past": "{0} mo ago",
-    			"future": "in {0} mo"
-    		},
-    		"week": {
-    			"previous": "last wk",
-    			"current": "this wk",
-    			"next": "next wk",
-    			"past": "{0} wk ago",
-    			"future": "in {0} wk"
-    		},
-    		"day": {
-    			"previous": "yesterday",
-    			"current": "today",
-    			"next": "tomorrow",
-    			"past": {
-    				"one": "{0} day ago",
-    				"other": "{0} days ago"
-    			},
-    			"future": {
-    				"one": "in {0} day",
-    				"other": "in {0} days"
-    			}
-    		},
-    		"hour": {
-    			"current": "this hour",
-    			"past": "{0} hr ago",
-    			"future": "in {0} hr"
-    		},
-    		"minute": {
-    			"current": "this minute",
-    			"past": "{0} min ago",
-    			"future": "in {0} min"
-    		},
-    		"second": {
-    			//"current": "now",
-    			"past": "{0} sec ago",
-    			"future": "in {0} sec"
-    		}
-    	},
-    	"narrow": {
-    		"year": {
-    			"previous": "last yr",
-    			"current": "this yr",
-    			"next": "next yr",
-    			"past": "{0} yr ago",
-    			"future": "in {0} yr"
-    		},
-    		"quarter": {
-    			"previous": "last qtr.",
-    			"current": "this qtr.",
-    			"next": "next qtr.",
-    			"past": "{0} qtr ago",
-    			"future": "in {0} qtr"
-    		},
-    		"month": {
-    			"previous": "last mo",
-    			"current": "this mo",
-    			"next": "next mo",
-    			"past": "{0} mo ago",
-    			"future": "in {0} mo"
-    		},
-    		"week": {
-    			"previous": "last wk",
-    			"current": "this wk",
-    			"next": "next wk",
-    			"past": "{0} wk ago",
-    			"future": "in {0} wk"
-    		},
-    		"day": {
-    			"previous": "yesterday",
-    			"current": "today",
-    			"next": "tomorrow",
-    			"past": {
-    				"one": "{0} day ago",
-    				"other": "{0} days ago"
-    			},
-    			"future": {
-    				"one": "in {0} day",
-    				"other": "in {0} days"
-    			}
-    		},
-    		"hour": {
-    			"current": "this hour",
-    			"past": "{0} hr ago",
-    			"future": "in {0} hr"
-    		},
-    		"minute": {
-    			"current": "this minute",
-    			"past": "{0} min ago",
-    			"future": "in {0} min"
-    		},
-    		"second": {
-    			"current": "now",
-    			"past": "{0} sec ago",
-    			"future": "in {0} sec"
-    		}
-    	}
-    });
-
-
-    function generalFormat(the_style) {
-      return moment(date).format(the_style);
-    }
-
-    function relativeTime() {
-      return new TimeAgo('en-US').format(date);
-    }
-
-    function generateNewTs(style) {
-      var formatDict = {
-        f: generalFormat('MMMM D YYYY, h:mm A'),
-        F: generalFormat('dddd MMMM D YYYY, h:mm A'),
-        R: relativeTime(),
-        t: generalFormat('h:mm A'),
-        T: generalFormat('h:mm:ss A'),
-      };
-      return formatDict[style]
-    }
-
-    function changeDate(newDate) {
-      var dateControl = document.querySelector('input[type="datetime-local"]');
-      dateControl.value = newDate;
-    }
-
-    changeDate(date.toLocaleString("sv-SE", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-    }).replace(" ", "T"))
-
-    function updateDatetime() {
-      var Control = document.querySelector('input[type="datetime-local"]');
-      var str1 = "";
-      date = Date.parse(Control.value);
-
-      var selection = document.getElementById("timestamp-format");
-      var style = selection.value;
-
-      var nextDate = str1.concat("&lt;t:", Math.round(date / 1000), ":", style, "&gt;");
-      if (document.getElementById("timestamp").innerHTML !== nextDate) {
-        document.getElementById("timestamp").innerHTML = nextDate;
-        document.getElementById("formatted").innerHTML = generateNewTs(style);
-      }
-    }
-
-    function copyTimestamp(text) {
-      //window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
-      const el = document.createElement('textarea');
-      el.value = text.replace('&lt;', '<').replace('&gt;', '>');
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand('copy');
-      document.body.removeChild(el);
-    }
-
-    updateDatetime()
-    setInterval(updateDatetime, 100);
-  </script>
-
+  <script type="text/javascript" src="converter.js"></script>
 </body>
 </html>
